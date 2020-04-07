@@ -23,7 +23,7 @@ def window_image(image, window_center, window_width):
     
     return window_image
 # %%
-file_path = "/Users/alvinhuang/Desktop/ich0001_2/ICH0011/ICH0011VS14.dcm"
+file_path = "/Users/alvinhuang/Desktop/ICH0001-80_original_file/ICH0001-21/ICH0016/ICH0016VS04.dcm"
 medical_image = pydicom.read_file(file_path)
 
 # %%

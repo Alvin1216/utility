@@ -49,7 +49,7 @@ def save_one_person_npy(patient_number,image):
     filename = patient_number + '_dicom_image'
     filepath = save_to_npy(base_path,filename,np.asarray(image))
 
-base_path = "/Users/alvinhuang/Desktop/T01-T21_original_data"
+base_path = "/Users/alvinhuang/Desktop/NICH0041-0070"
 for index,folder_name in zip(range(0,len(listdir(base_path))),sorted(listdir(base_path))):
     image_folder_path = os.path.join(base_path,folder_name)
     if folder_name != '.DS_Store':
