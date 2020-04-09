@@ -55,6 +55,12 @@ def seperate_connect_conponent(index,connect_conp):
     image[mask] = 1
     return image
 
+def background_maker(connect_conp):
+    mask = np.where(connect_conp >= 1)
+    image = np.ones((512,512),np.uint8)
+    image[mask] = 0
+    return image
+
 def make_five_channel_label(label_only,label_names):
     edh = np.zeros((512,512),np.uint8)
     sdh = np.zeros((512,512),np.uint8)
@@ -78,6 +84,7 @@ def make_five_channel_label(label_only,label_names):
                     edh = seperate_connect_conponent(index,label_only)
                 elif typer == 'IVH':
                     ivh = seperate_connect_conponent(index,label_only)
+        none = background_maker(label_only)
         label = np.stack((edh,sdh,sah,ich,ivh,none),axis = -1)
 
     print(label.shape)
@@ -216,3 +223,16 @@ print(labels_array.shape)
 
 # %%
 save_one_person_npy('old_data_train',labels_array)
+
+#%%
+def plot_6_channel(one_images):
+  #one_images = one_images*255
+  plt.figure(figsize=(10,5))
+  for index in range(0,6):
+    #print(index)
+    #predict_binary = np.where(one_images[:,:,index]>0.5,1,0)
+    plt.subplot(1,6,index+1)
+    plt.imshow(one_images[:,:,index],vmin = 0,vmax = 1)
+    plt.axis("off")
+
+# %%
