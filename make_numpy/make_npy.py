@@ -1,3 +1,4 @@
+#%%
 import labelme
 from labelme import utils
 import os, cv2, random, re , json
@@ -6,9 +7,11 @@ from os import listdir
 from os.path import isfile, join
 import matplotlib.pyplot as plt
 
+#%%
 IMAGE_HEIGH = 512
 IMAGE_WIDTH = 512
 
+#%%
 def generate_label_png(json_file_path):
     print('generate_label_png'+json_file_path)
     data = json.load(open(json_file_path))
