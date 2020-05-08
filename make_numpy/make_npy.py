@@ -106,7 +106,7 @@ def load_one_person_image(image_folder_path):
     return original_all_image,original_all_label,image_has_segmentation
 
 def save_one_person_npy(image_folder_path,patient_number):
-    base_path = os.path.join('/Users/alvinhuang/Desktop/new_ich_npy/6180',patient_number)
+    base_path = os.path.join('/Users/alvinhuang/Desktop/new_ich_npy/171207',patient_number)
     original_all_image,original_all_label,image_has_segmentation = load_one_person_image(image_folder_path)
     filename = patient_number + '_image'
     filepath = save_to_npy(base_path,filename,np.asarray(original_all_image))
@@ -120,7 +120,8 @@ def save_one_person_npy(image_folder_path,patient_number):
     filepath = save_to_npy(base_path,filename,np.asarray(image_has_segmentation))
     print('flag done! npz in '+ filepath)
 
-base_path = "/Users/alvinhuang/Desktop/ICH0001-80/ICH0061-80"
+#%%
+base_path = "/Users/alvinhuang/Desktop/ICH171-207"
 for index,folder_name in zip(range(0,len(listdir(base_path))),sorted(listdir(base_path))):
     print(index,folder_name)
     if folder_name != '.DS_Store':
@@ -132,3 +133,5 @@ for index,folder_name in zip(range(0,len(listdir(base_path))),sorted(listdir(bas
         # save_one_person_npy(image_folder_path,folder_name)
 
 #generate_label_png('/Users/alvinhuang/Desktop/ich0001_2/ICH0011/ICH0011VS17.json')
+
+# %%

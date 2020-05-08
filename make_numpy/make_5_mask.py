@@ -234,8 +234,9 @@ def make_labels(base_path):
             
             #load_dicom
             #dicom_filename = image_name.split('.')[0] + '.dcm'
+            #dicom_filename = filename.split('-')[1] + '.dcm'
             filename = image_name.split('.')[0]
-            dicom_filename = filename.split('-')[1] + '.dcm'
+            dicom_filename = image_name.split('.')[0] + '.dcm'
             dicom_path = os.path.join(base_path , dicom_filename)
             medical_image = pydicom.read_file(dicom_path)
             image_dicom = medical_image.pixel_array
@@ -271,12 +272,12 @@ def make_labels(base_path):
     labels_array = np.asarray(labels).astype('uint8')
     images_array = np.asarray(images).astype('uint8')
     dicom_images_array = np.asarray(dicom_images).astype('uint8')
-    single_labels_array = np.asarray(single_labels).astype('uint8')
+    #single_labels_array = np.asarray(single_labels).astype('uint8')
     return labels_array,images_array,dicom_images_array,single_labels,markers
 
 #%%
 def save_one_person_npy(image_folder_path,patient_number):
-    base_path = os.path.join('/Users/alvinhuang/Desktop/five_label/old_data_test',patient_number)
+    base_path = os.path.join('/Users/alvinhuang/Desktop/170207',patient_number)
     original_all_image,original_all_label = load_one_image_with_five_label(image_folder_path)
     filename = patient_number + '_image'
     filepath = save_to_npy(base_path,filename,np.asarray(original_all_image))
@@ -289,7 +290,7 @@ def save_one_person_npy(image_folder_path,patient_number):
     print('label done! npz in '+ filepath)
 
 #%%
-base_path = "/Users/alvinhuang/Desktop/T01-T21_original_data"
+base_path = "/Users/alvinhuang/Desktop/ICH171-207"
 for index,folder_name in zip(range(0,len(listdir(base_path))),sorted(listdir(base_path))):
     print(index,folder_name)
     if folder_name != '.DS_Store':
@@ -315,10 +316,10 @@ def save_to_npy(base_path,filename,nparray):
 
 # %%
 #C:\Users\alvinhuang\Desktop\ICH081-ICH170\ICH0081
-base_path = "C:\\Users\\alvinhuang\\Desktop\\T01-T73"
+base_path = "C:\\Users\\alvinhuang\\Desktop\\ICH171-207"
 
 for index,folder_name in zip(range(0,len(listdir(base_path))),sorted(listdir(base_path))):
-    save_numpy_path = "C:\\Users\\alvinhuang\\Desktop\\five_label"
+    save_numpy_path = "C:\\Users\\alvinhuang\\Desktop\\171207"
     save_new_folder = os.path.join(save_numpy_path,folder_name)
     if not os.path.exists(save_new_folder):
         os.makedirs(save_new_folder)
@@ -329,12 +330,12 @@ for index,folder_name in zip(range(0,len(listdir(base_path))),sorted(listdir(bas
     print('labels_array shape : ',labels_array.shape)
     print('images_array(png) shape : ',images_array.shape)
     print('dicom_images_array shape : ',dicom_images_array.shape)
-    print('single_labels shape : ',len(single_labels))
+    #print('single_labels shape : ',len(single_labels))
     print('makers shape : ',len(makers))
     save_to_npy(save_new_folder,folder_name+'_5labels.npy',labels_array)
     save_to_npy(save_new_folder,folder_name+'_png_img.npy',images_array)
     save_to_npy(save_new_folder,folder_name+'_dicom_img.npy',dicom_images_array)
-    save_to_npy(save_new_folder,folder_name+'_single_label.npy',single_labels)
+    #save_to_npy(save_new_folder,folder_name+'_single_label.npy',single_labels)
     save_to_npy(save_new_folder,folder_name+'_makers.npy',makers)
 
 # %%
